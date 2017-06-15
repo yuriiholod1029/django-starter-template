@@ -7,6 +7,7 @@ cffi==1.7.0
 click==6.6
 coverage==4.2
 Django==1.10
+dj_database_url==0.4.2
 django-appconf==1.0.2
 django-bootstrap3==7.1.0
 django-compressor==2.1
