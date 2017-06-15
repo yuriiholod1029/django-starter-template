@@ -1,5 +1,3 @@
-""" Default urlconf for {{ project_name }} """
-
 from django.conf import settings
 from django.conf.urls import include, url
 from django.conf.urls.static import static
@@ -53,3 +51,4 @@ if settings.DEBUG:
         url(r'^404/$', page_not_found),
         url(r'^500/$', server_error)
     ]
+

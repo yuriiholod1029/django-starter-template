@@ -26,29 +26,27 @@ path.append(os.path.join(PROJECT_ROOT, "libs"))
 # https://docs.djangoproject.com/en/1.10/ref/settings/#site-id
 SITE_ID = 1
 
-# https://docs.djangoproject.com/en/1.10/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
-
 # https://docs.djangoproject.com/en/1.10/ref/settings/#installed-apps
 INSTALLED_APPS = [
     # Django apps
-    'django.contrib.admin',
-    'django.contrib.admindocs',
+    #'django.contrib.admin',
+    #'django.contrib.admindocs',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.humanize',
-    'django.contrib.sitemaps',
-    'django.contrib.syndication',
+    #'django.contrib.sites',
+    #'django.contrib.messages',
+    #'django.contrib.humanize',
+    #'django.contrib.sitemaps',
+    #'django.contrib.syndication',
     'django.contrib.staticfiles',
 
     # Third party apps
     'compressor',
+    'bootstrap3',
 
     # Local apps
-    'base',
+    'base'
 ]
 
 # https://docs.djangoproject.com/en/1.10/topics/auth/passwords/#using-argon2-with-django
@@ -91,7 +89,7 @@ USE_TZ = True
 # MEDIA AND STATIC SETTINGS
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # https://docs.djangoproject.com/en/1.10/ref/settings/#media-root
-MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'public/media')
+MEDIA_ROOT = os.path.join(os.path.dirname(PROJECT_ROOT), 'public', 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Use a trailing slash.
 # https://docs.djangoproject.com/en/1.10/ref/settings/#media-url
@@ -101,7 +99,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # https://docs.djangoproject.com/en/1.10/ref/settings/#static-root
-STATIC_ROOT = os.path.join(PROJECT_ROOT, 'public/static')
+STATIC_ROOT = os.path.join(os.path.dirname(PROJECT_ROOT), 'public', 'static')
 
 # URL prefix for static files.
 # https://docs.djangoproject.com/en/1.10/ref/settings/#static-url
@@ -141,7 +139,7 @@ TEMPLATES = [
 
 # URL SETTINGS
 # https://docs.djangoproject.com/en/1.10/ref/settings/#root-urlconf.
-ROOT_URLCONF = '{{ project_name }}.urls'
+ROOT_URLCONF = 'project.urls'
 
 
 # MIDDLEWARE SETTINGS
@@ -160,9 +158,17 @@ MIDDLEWARE_CLASSES = [
 # https://docs.djangoproject.com/en/1.10/topics/logging/
 LOGGING = {
     'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
     'loggers': {
-        '{{ project_name }}': {
-            'level': "DEBUG"
-        }
-    }
+        'django': {
+            'handlers': ['console'],
+            #'level': 'DEBUG',
+            'level': 'INFO',
+        },
+    },
 }
