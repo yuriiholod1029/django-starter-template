@@ -1,0 +1,33 @@
+version: '2'
+services:
+  nginx:
+    restart: always
+    build: ./nginx/
+    ports:
+      - ${ALLOWED_HOST}:80:80
+    volumes:
+      - /www/static
+    volumes_from:
+      - django
+    depends_on:
+      - django
+  django:
+    restart: always
+    build: .
+    command: ./home/docker/code/prepare-containers.sh
+    volumes:
+      - /home/docker/code/public/static
+      - ${HOST_MEDIA_PERSIST_DIR}:/home/docker/code/public/media
+    environment:
+      - DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}
+      - SECRET_KEY=${DJANGO_SECRET_KEY}
+      - ALLOWED_HOST=${ALLOWED_HOST}
+    depends_on:
+      - db
+  db:
+    restart: always
+    image: mariadb:10.1.21
+    volumes:
+        - ${HOST_MYSQL_PERSIST_DIR}:/var/lib/mysql
+    env_file:
+      - .env
