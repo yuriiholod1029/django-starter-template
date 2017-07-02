@@ -1,6 +1,10 @@
 FROM python:3.5
 ENV PYTHONUNBUFFERED 1
 
+# Install dependencies for django-compressor
+RUN apt-get update
+RUN apt-get install -y node-less yui-compressor
+
 # Install uwsgi, which is only on production requirments.
 # It is not neccessary do keep wsgi in requirments.txt
 RUN pip install uwsgi
