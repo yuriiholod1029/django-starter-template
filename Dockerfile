@@ -11,8 +11,8 @@ RUN pip install uwsgi
 
 # Install requirments before adding rest of code.
 # It is allow to use Docker caching.
-ADD app/requirements.txt /home/docker/code/app/
-RUN pip install -r /home/docker/code/app/requirements.txt
+ADD app/requirements_prod.txt /home/docker/code/app/
+RUN pip install -r /home/docker/code/app/requirements_prod.txt
 
 # add the rest of code to image
 ADD . /home/docker/code/

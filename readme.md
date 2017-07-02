@@ -22,8 +22,9 @@ To create a new django project (make sure to change `project_name` and `path-to-
 
     django-admin.py startproject --template=path-to-downloaded-zip --extension=py,md,html,txt,less project_name
 
-Change directory to your project and install the dependences
+Change directory to your project and install the dependencies:
 
+    sudo apt-get install python3-dev libffi6 libffi-dev
     pip install -r app/requirements_dev.txt
 
 If you need a database (default sqlite), edit the settings and create one with
@@ -40,8 +41,8 @@ Standard commands are changed a little.
 
 To create new app to django project run in root of project (make sure to change `app-name`):
 	
-	mkdir app/apps/app-name
-	python app/manage_dev.py startapp app-name app/apps/app-name
+	python app/manage_dev.py startapp app-name
+	mv app-name/ app/apps/
 
 To make database migration file:
 
